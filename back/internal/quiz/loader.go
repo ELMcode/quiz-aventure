@@ -8,6 +8,7 @@ import (
 	"quiz-aventure/pkg/models"
 )
 
+// LoadQuestions loads the questions from the JSON file
 func LoadQuestions() []models.Question {
 	file, err := os.ReadFile("internal/quiz/questions.json")
 	if err != nil {

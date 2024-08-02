@@ -18,6 +18,7 @@ type CORSConfig struct {
 	AllowedOrigins []string
 }
 
+// LoadConfig loads config from the given path
 func LoadConfig(path string) (*Config, error) {
 	viper.SetConfigFile(path)
 	if err := viper.ReadInConfig(); err != nil {
