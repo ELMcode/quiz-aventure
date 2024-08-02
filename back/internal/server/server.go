@@ -14,6 +14,7 @@ type Server struct {
 	router *chi.Mux
 }
 
+// NewServer returns a new server
 func NewServer(cfg *config.Config) *Server {
 	r := router.NewRouter(cfg)
 	return &Server{
@@ -22,6 +23,7 @@ func NewServer(cfg *config.Config) *Server {
 	}
 }
 
+// Run starts the server
 func (s *Server) Run() error {
 	log.Printf("Server is running at %s", s.cfg.Server.Address)
 	return http.ListenAndServe(s.cfg.Server.Address, s.router)

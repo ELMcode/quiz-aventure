@@ -8,6 +8,7 @@ import (
 	"quiz-aventure/internal/handlers"
 )
 
+// NewRouter returns a new router
 func NewRouter(cfg *config.Config) *chi.Mux {
 	r := chi.NewRouter()
 

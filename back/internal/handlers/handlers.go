@@ -20,11 +20,13 @@ func init() {
 	score = 0
 }
 
+// GetQuestions returns the list of questions
 func GetQuestions(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(questions)
 }
 
+// CheckAnswer checks if the answer is correct
 func CheckAnswer(w http.ResponseWriter, r *http.Request) {
 	var req models.AnswerRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -57,6 +59,7 @@ func CheckAnswer(w http.ResponseWriter, r *http.Request) {
 			Score: currentScore})
 }
 
+// ResetScore resets the score
 func ResetScore(w http.ResponseWriter, r *http.Request) {
 	mutex.Lock()
 	score = 0
