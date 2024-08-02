@@ -23,6 +23,7 @@ func NewRouter(cfg *config.Config) *chi.Mux {
 
 	r.Get("/questions", handlers.GetQuestions)
 	r.Post("/check-answer", handlers.CheckAnswer)
+	r.Post("/reset-score", handlers.ResetScore)
 
 	return r
 }

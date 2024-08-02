@@ -56,3 +56,10 @@ func CheckAnswer(w http.ResponseWriter, r *http.Request) {
 		models.ScoreResponse{
 			Score: currentScore})
 }
+
+func ResetScore(w http.ResponseWriter, r *http.Request) {
+	mutex.Lock()
+	score = 0
+	mutex.Unlock()
+	w.WriteHeader(http.StatusOK)
+}
