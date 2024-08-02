@@ -1,0 +1,6 @@
+server:
+  address: ":8081"
+
+cors:
+  allowed_origins:
+    - "http://localhost:8080"
