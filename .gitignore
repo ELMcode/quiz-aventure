@@ -216,4 +216,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Front-end specific files
+front/node_modules/
+front/dist/
+
+# Go specific files
+back/vendor/
+back/bin/
+
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Go,Vue,Node,Linux,Vuejs,macOS,Windows
