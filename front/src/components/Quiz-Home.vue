@@ -2,11 +2,7 @@
   <div>
     <h1>Quiz Aventure</h1>
 
-    <h2>Bienvenue dans Quiz Aventure !</h2>
-
-    <p>Quizz de culture générale</p>
-    <p>Réponse correcte = 10 points !</p>
-    <p>Réponse incorrecte = - 5 points !</p>
+    <h2 v-if="currentLevelName">Niveau: {{ currentLevelName }}</h2>
 
     <div v-if="currentQuestion">
       <h2>{{ currentQuestion.text }}</h2>
@@ -23,13 +19,18 @@ export default {
     return {
       score: 0,
       questions: [],
+      levels: ["Débutant", "Intermédiaire", "Expert"],
+      currentLevel: 1,
       currentQuestionIndex: 0,
       userAnswer: ""
     };
   },
   computed: {
     currentQuestion() {
-      return this.questions[this.currentQuestionIndex];
+      return this.questions.filter(q => q.level === this.currentLevel)[this.currentQuestionIndex];
+    },
+    currentLevelName() {
+      return this.levels[this.currentLevel - 1];
     }
   },
   methods: {
@@ -56,11 +57,28 @@ export default {
             this.score = data.score;
             this.userAnswer = "";
             this.currentQuestionIndex++;
-            if (this.currentQuestionIndex >= this.questions.length) {
-              alert("Quiz terminé! Votre score est: " + this.score);
-              this.currentQuestionIndex = 0
-              this.score = 0;
+            const currentLevelQuestions = this.questions.filter(q => q.level === this.currentLevel);
+            if (this.currentQuestionIndex >= currentLevelQuestions.length) {
+              this.currentQuestionIndex = 0;
+              this.currentLevel++;
+              if (this.currentLevel > this.levels.length) {
+                alert("Quiz terminé! Votre score final est: " + this.score);
+                this.resetQuiz();
+              }
             }
+          });
+    },
+    resetQuiz() {
+      fetch('http://localhost:8081/reset-score', {
+        method: 'POST'
+      })
+          .then(() => {
+            this.currentLevel = 1;
+            this.currentQuestionIndex = 0;
+            this.score = 0;
+          })
+          .catch(error => {
+            console.error('Error resetting score:', error);
           });
     }
   },
