@@ -4,6 +4,7 @@ type Question struct {
 	ID            int    `json:"id"`
 	Text          string `json:"text"`
 	CorrectAnswer string `json:"correctAnswer"`
+	Level         int    `json:"level"`
 }
 
 type AnswerRequest struct {
