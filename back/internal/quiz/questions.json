@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "text": "Quelle est la capitale de la France?",
+    "correctAnswer": "Paris",
+    "level": 1
+  },
+  {
+    "id": 2,
+    "text": "Combien fait 2 + 2?",
+    "correctAnswer": "4",
+    "level": 1
+  },
+  {
+    "id": 3,
+    "text": "Quelle est la couleur du ciel?",
+    "correctAnswer": "Bleu",
+    "level": 1
+  },
+  {
+    "id": 4,
+    "text": "Combien de pattes a un chien?",
+    "correctAnswer": "4",
+    "level": 1
+  },
+  {
+    "id": 5,
+    "text": "Quelle est la première lettre de l'alphabet?",
+    "correctAnswer": "A",
+    "level": 1
+  },
+  {
+    "id": 6,
+    "text": "Quelle est la distance entre la Terre et la Lune?",
+    "correctAnswer": "384400 km",
+    "level": 2
+  },
+  {
+    "id": 7,
+    "text": "Qui a peint la Joconde?",
+    "correctAnswer": "Léonard de Vinci",
+    "level": 2
+  },
+  {
+    "id": 8,
+    "text": "Combien de continents y a-t-il sur Terre?",
+    "correctAnswer": "7",
+    "level": 2
+  },
+  {
+    "id": 9,
+    "text": "Quel est le plus grand océan de la Terre?",
+    "correctAnswer": "Océan Pacifique",
+    "level": 2
+  },
+  {
+    "id": 10,
+    "text": "Quelle est la capitale de l'Italie?",
+    "correctAnswer": "Rome",
+    "level": 2
+  },
+  {
+    "id": 11,
+    "text": "Quelle est la vitesse de la lumière?",
+    "correctAnswer": "299792458 m/s",
+    "level": 3
+  },
+  {
+    "id": 12,
+    "text": "Quelle est la formule chimique de l'eau?",
+    "correctAnswer": "H2O",
+    "level": 3
+  },
+  {
+    "id": 13,
+    "text": "Quel est le plus grand désert du monde?",
+    "correctAnswer": "Sahara",
+    "level": 3
+  },
+  {
+    "id": 14,
+    "text": "Quel est le symbole chimique de l'or?",
+    "correctAnswer": "Au",
+    "level": 3
+  },
+  {
+    "id": 15,
+    "text": "Quel est le point culminant de la Terre?",
+    "correctAnswer": "Mont Everest",
+    "level": 3
+  }
+]
