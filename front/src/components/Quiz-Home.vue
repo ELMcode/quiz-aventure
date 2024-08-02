@@ -1,22 +1,35 @@
 <template>
   <div>
-    <h1>Quiz Aventure</h1>
-
-    <h2 v-if="currentLevelName">Niveau: {{ currentLevelName }}</h2>
-
-    <div v-if="currentQuestion">
-      <h2>{{ currentQuestion.text }}</h2>
-      <input v-model="userAnswer" placeholder="Votre réponse" />
-      <button @click="checkAnswer">Valider</button>
+    <div v-if="!pseudo">
+      <PseudoForm @submit="setPseudo" />
     </div>
-    <p>Score: {{ score }}</p>
+    <div v-else>
+      <h1>Quiz Aventure</h1>
+
+      <h2 v-if="currentLevelName">Niveau: {{ currentLevelName }}</h2>
+
+      <div v-if="currentQuestion">
+        <h2>{{ currentQuestion.text }}</h2>
+        <input v-model="userAnswer" placeholder="Votre réponse" />
+        <button @click="checkAnswer">Valider</button>
+      </div>
+      <p>Pseudo: {{ pseudo }} | Score: {{ score }}</p>
+      <button @click="resetQuiz">Recommencer</button>
+      <button @click="changePlayer">Changer de joueur</button>
+    </div>
   </div>
 </template>
 
 <script>
+import PseudoForm from './PseudoForm.vue';
+
 export default {
+  components: {
+    PseudoForm
+  },
   data() {
     return {
+      pseudo: '',
       score: 0,
       questions: [],
       levels: ["Débutant", "Intermédiaire", "Expert"],
@@ -34,6 +47,10 @@ export default {
     }
   },
   methods: {
+    setPseudo(pseudo) {
+      this.pseudo = pseudo;
+      this.saveProgress(); // Save pseudo to local storage
+    },
     fetchQuestions() {
       fetch('http://localhost:8081/questions')
           .then(response => response.json())
@@ -84,15 +101,22 @@ export default {
             console.error('Error resetting score:', error);
           });
     },
+    changePlayer() {
+      this.pseudo = '';
+      this.resetQuiz();
+      localStorage.removeItem('quizPseudo');
+    },
     saveProgress() {
       localStorage.setItem('quizCurrentLevel', this.currentLevel);
       localStorage.setItem('quizCurrentQuestionIndex', this.currentQuestionIndex);
       localStorage.setItem('quizScore', this.score);
+      localStorage.setItem('quizPseudo', this.pseudo);
     },
     restoreProgress() {
       const savedLevel = localStorage.getItem('quizCurrentLevel');
       const savedQuestionIndex = localStorage.getItem('quizCurrentQuestionIndex');
       const savedScore = localStorage.getItem('quizScore');
+      const savedPseudo = localStorage.getItem('quizPseudo');
 
       if (savedLevel !== null) {
         this.currentLevel = parseInt(savedLevel, 10);
@@ -102,6 +126,9 @@ export default {
       }
       if (savedScore !== null) {
         this.score = parseInt(savedScore, 10);
+      }
+      if (savedPseudo !== null) {
+        this.pseudo = savedPseudo;
       }
     }
   },
@@ -114,5 +141,8 @@ export default {
 <style scoped>
 h1 {
   color: #2c3e50;
+}
+button {
+  margin: 10px;
 }
 </style>
