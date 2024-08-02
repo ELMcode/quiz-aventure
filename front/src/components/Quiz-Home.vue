@@ -39,6 +39,7 @@ export default {
           .then(response => response.json())
           .then(data => {
             this.questions = data;
+            this.restoreProgress();
           });
     },
     checkAnswer() {
@@ -66,6 +67,7 @@ export default {
                 this.resetQuiz();
               }
             }
+            this.saveProgress();
           });
     },
     resetQuiz() {
@@ -76,10 +78,31 @@ export default {
             this.currentLevel = 1;
             this.currentQuestionIndex = 0;
             this.score = 0;
+            this.saveProgress();
           })
           .catch(error => {
             console.error('Error resetting score:', error);
           });
+    },
+    saveProgress() {
+      localStorage.setItem('quizCurrentLevel', this.currentLevel);
+      localStorage.setItem('quizCurrentQuestionIndex', this.currentQuestionIndex);
+      localStorage.setItem('quizScore', this.score);
+    },
+    restoreProgress() {
+      const savedLevel = localStorage.getItem('quizCurrentLevel');
+      const savedQuestionIndex = localStorage.getItem('quizCurrentQuestionIndex');
+      const savedScore = localStorage.getItem('quizScore');
+
+      if (savedLevel !== null) {
+        this.currentLevel = parseInt(savedLevel, 10);
+      }
+      if (savedQuestionIndex !== null) {
+        this.currentQuestionIndex = parseInt(savedQuestionIndex, 10);
+      }
+      if (savedScore !== null) {
+        this.score = parseInt(savedScore, 10);
+      }
     }
   },
   mounted() {
